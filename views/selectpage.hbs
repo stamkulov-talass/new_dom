@@ -1,0 +1,78 @@
+<div class="row col-6">
+    <div class="card">
+        <h1>Select Form University</h1>
+        <ul>
+            {{#each selectrows}}
+            <li>{{fam}}</li>
+            <li>{{name}}</li>
+            <li>{{surname}}</li>
+            <li>{{post}}</li>
+            <a href="/selectpage?id_teacher={{id_teacher}}">
+                <button class="btn btn-primary btn-sm mt-3 mb-3">DELETE</button>
+            </a>
+            <button type="button" class="btn btn-primary btn-sm mt-3 mb-3" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" data-bs-whatever="{{id_teacher}}">UPDATE</button>
+            <hr>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update user</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form name="myform" action="/update" method="POST">
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">id:</label>
+                                    <input name="id" type="text" class="form-control" id="recipient-name" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Имя:</label>
+                                    <input name="name" type="text" class="form-control" value="{{name}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Фамилия:</label>
+                                    <input name="fam" type="text" class="form-control" value="{{fam}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Отчество:</label>
+                                    <input name="surname" type="text" class="form-control" value="{{surname}}">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Пост:</label>
+                                    <input name="post" type="text" class="form-control" value="{{post}}">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </ul>
+
+    </div>
+</div>
+
+<script>
+    var exampleModal = document.getElementById('exampleModal')
+    exampleModal.addEventListener('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = event.relatedTarget
+        // Extract info from data-bs-* attributes
+        var recipient = button.getAttribute('data-bs-whatever')
+        // If necessary, you could initiate an AJAX request here
+        // and then do the updating in a callback.
+        //
+        // Update the modal's content.
+        var modalTitle = exampleModal.querySelector('.modal-title')
+        var modalBodyInput = exampleModal.querySelector('.modal-body input')
+        modalTitle.textContent = 'UPDATE where user id:' + recipient
+        modalBodyInput.value = recipient
+    })
+</script>

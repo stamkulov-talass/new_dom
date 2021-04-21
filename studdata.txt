@@ -1,0 +1,1 @@
+[{"name":"talass","lastname":stamkulov","age":"19","group":"pi-9 1-18","course":"3"}]
